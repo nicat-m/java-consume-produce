@@ -3,6 +3,8 @@
 ```
 # Set env
 
+# src/main/resources/application.properties
+
 kafka.bootstrapServers=broker1.local:9092,broker2.local:9092,broker3.local:9092
 kafka.username=${SASL_USER}
 kafka.password=${SALS_PASS}
