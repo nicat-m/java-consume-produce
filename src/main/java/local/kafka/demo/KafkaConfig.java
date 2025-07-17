@@ -5,6 +5,7 @@ import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
+import org.apache.kafka.common.protocol.types.Field;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
@@ -23,11 +24,13 @@ public class KafkaConfig {
     private String truststoreLocation;
     @Value("${kafka.truststorePassword}")
     private String truststorePassword;
+    @Value("${kafka.securityProtocol}")
+    private String securityProtocol;
 
     public Properties commonProps() {
         Properties props = new Properties();
         props.put("bootstrap.servers", bootstrapServers);
-        props.put("security.protocol", "SASL_SSL");
+        props.put("security.protocol", securityProtocol);
         props.put("sasl.mechanism", "SCRAM-SHA-256");
         props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
         props.put("sasl.jaas.config", String.format(
